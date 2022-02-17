@@ -1,5 +1,10 @@
 class ToppagesController < ApplicationController
+  
   def index
     #render :index
+    if logged_in?
+     @micropost = current_user.microposts.build 
+     @pagy, @microposts = pagy(current_user.microposts.order(id: :desc))
+    end
   end
 end
